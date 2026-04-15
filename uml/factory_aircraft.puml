@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractAircraft{
+	# maxHp:int
+    # hp:int
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + decreaseHp(int decrease):void
+    + getHp():int
+    + {abstract} shoot():List<BaseBullet>
+    + {abstract} GetTools(int LocationX, int LocationY):List<BaseTool>
+}
+interface AircraftFactory{
+     + {abstract} CreatAircraft() AbstractAircraft
+}
+
+class MobEnemyFactory{
+    + CreatAircraft() MobEnemy
+}
+
+class MobEnemy_plusFactory{
+    + CreatAircraft() MobEnemy_plus
+}
+
+class SuperMobEnemyFactory{
+    + CreatAircraft() SuperMobEnemy
+}
+
+class AceMobEnemyFactory{
+    + CreatAircraft() AceMobEnemy
+}
+
+AircraftFactory <|.. MobEnemyFactory
+AircraftFactory <|.. MobEnemy_plusFactory
+AircraftFactory <|.. SuperMobEnemyFactory
+AircraftFactory <|.. AceMobEnemyFactory
+
+MobEnemyFactory ..> MobEnemy
+MobEnemy_plusFactory ..> MobEnemy_plus
+SuperMobEnemyFactory ..> SuperMobEnemy
+AceMobEnemyFactory ..> AceMobEnemy
+
+class MobEnemy {
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+}
+
+class MobEnemy_plus {
+    + MobEnemy_plus(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<EnemyBullet>
+    + GetTools(int LocationX, int LocationY):List<BaseTool>
+}
+
+class SuperMobEnemy {
+    + SuperMobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<EnemyBullet>
+    + GetTools(int LocationX, int LocationY):List<BaseTool>
+}
+
+class AceMobEnemy {
+    + AceMobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<EnemyBullet>
+    + GetTools(int LocationX, int LocationY):List<BaseTool>
+}
+
+AbstractAircraft <|-- MobEnemy
+AbstractAircraft <|-- MobEnemy_plus
+MobEnemy_plus <|-- SuperMobEnemy
+MobEnemy_plus <|-- AceMobEnemy
+
+@enduml

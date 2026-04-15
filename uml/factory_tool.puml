@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract BaseTool {
+    # type:int
+    + BaseTool(int locationX, int locationY, int speedX, int speedY, int type)
+    + forward():void
+    + getEffect(): int
+}
+
+class ToolFactory{
+    + {static} CreatTool (int type, int LocationX, int LocationY) BaseTool
+}
+BaseTool <|-- ToolFactory
+
+class BloodTool{
+    + BloodTool(int locationX, int locationY, int speedX, int speedY, int type)
+}
+
+class FireTool{
+    + FireTool((int locationX, int locationY, int speedX, int speedY, int type)
+}
+
+class FirePlusTool{
+    + FirePlusTool((int locationX, int locationY, int speedX, int speedY, int type)
+}
+
+class BombTool{
+    + BombTool(int locationX, int locationY, int speedX, int speedY, int type)
+}
+
+class FreezeTool{
+    + FreezeTool(int locationX, int locationY, int speedX, int speedY, int type)
+}
+
+ToolFactory ..> BloodTool
+ToolFactory ..> FireTool
+ToolFactory ..> FirePlusTool
+ToolFactory ..> BombTool
+ToolFactory ..> FreezeTool
+
+@enduml
