@@ -275,12 +275,10 @@ public class Game extends JPanel {
 
     private void generateranking(){
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Ranking ranking = new Ranking(1, "testUserName", score, time);
-        RankingDaoImpl rankingDao = new RankingDaoImpl();
-        rankingDao.loadFromFile("ranking.txt");
-        rankingDao.ADDRanking(ranking);
-        rankingDao.saveToFile("ranking.txt");
-        rankingDao.OutputRankings();
+        List<User> users = new ArrayList<>();
+        UserDAOImpl userDao = new UserDAOImpl();
+        userDao.addUser("testUserName", score, time);
+        users = userDao.getAllUsers();
     }
 
     //***********************
